@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 
 interface MonetaryInputProps {
-    value?: number
     handleChange?: (newValue: number) => void
 }
 
@@ -10,20 +9,21 @@ const MonetaryInput = (props: MonetaryInputProps) => {
     const [value, setValue] = useState("0.00")
 
     const roundToQuarter = (num: number) => {
-        return Math.round(num * 100) / 100;
+        return Math.round(num * 100) / 100
       }
     
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const inputValue = parseFloat(event.target.value);
+        const inputValue = parseFloat(event.target.value)
 
         if (isNaN(inputValue)) {
-          setValue("0.00");
-          return;
+          setValue("0.00")
+          return
         }
 
-        const roundedValue = roundToQuarter(inputValue);
+        const roundedValue = roundToQuarter(inputValue)
         setValue(roundedValue.toFixed(2))
-      };
+      }
+      
     return (
         <div>
             <input type='text' value={value} onChange={handleChange} placeholder="Enter a number" />
@@ -32,3 +32,4 @@ const MonetaryInput = (props: MonetaryInputProps) => {
 }
 
 export default MonetaryInput
+ 

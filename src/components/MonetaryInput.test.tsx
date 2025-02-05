@@ -6,9 +6,10 @@ beforeEach(() => {
     render(<MonetaryInput />)
 })
 
-
 it("Should properly render monetary input with no value", () => {
-    expect(screen.getByDisplayValue("0.00")).toBeInTheDocument()
+    const inputElement = screen.getByDisplayValue("0.00")
+    expect(inputElement).toBeInTheDocument()
+    expect(inputElement).toBeVisible()
 })
 
 it("Should properly round the value with default precision", () => {
