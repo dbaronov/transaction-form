@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
-
+import React, { useState } from 'react';
 
 interface MonetaryInputProps {
-    value?: number
     handleChange?: (newValue: number) => void
 }
 
@@ -10,8 +8,8 @@ const MonetaryInput = (props: MonetaryInputProps) => {
     const [value, setValue] = useState("0.00")
 
     const roundToQuarter = (num: number) => {
-        return Math.round(num * 100) / 100;
-      }
+      return Math.round(num * 100) / 100;
+    }
     
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = parseFloat(event.target.value);
@@ -23,6 +21,7 @@ const MonetaryInput = (props: MonetaryInputProps) => {
 
         const roundedValue = roundToQuarter(inputValue);
         setValue(roundedValue.toFixed(2))
+        props.handleChange && props.handleChange(roundedValue)
       };
     return (
         <div>
