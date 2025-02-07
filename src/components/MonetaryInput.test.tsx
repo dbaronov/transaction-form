@@ -29,15 +29,21 @@ describe("Basic appearance", () => {
 
 describe("Input behaviour", () => {
     it("Should call handleChange with the right value", () => {
-        const mockhandleCheck = jest.fn()
-        render(<MonetaryInput handleChange={mockhandleCheck} />)
+        const mockHandleCheck = jest.fn()
+        render(<MonetaryInput handleChange={mockHandleCheck} />)
         const inputElement = screen.getByDisplayValue("0.00")
         fireEvent.change(inputElement, { target: { value: "6.5005" } })
-        expect(mockhandleCheck).toBeCalledTimes(1)
-        expect(mockhandleCheck).toBeCalledWith(6.5)
+        expect(mockHandleCheck).toBeCalledTimes(1)
+        expect(mockHandleCheck).toBeCalledWith(6.5)
     })
 
     it("Should work with the arbitrary precision", () => {
-        
+        const mockHandleCheck = jest.fn()
+        render(<MonetaryInput precision={8} handleChange={mockHandleCheck} />)
+        const inputElement = screen.getByDisplayValue("0.00000000")
+        fireEvent.change(inputElement, { target: { value: "6.5005" } })
+        expect(mockHandleCheck).toBeCalledTimes(1)
+        expect(mockHandleCheck).toBeCalledWith(6.5005)
+        expect(screen.getByDisplayValue("0.00065005")).toBeInTheDocument()
     })
 })
